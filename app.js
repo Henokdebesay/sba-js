@@ -100,26 +100,32 @@ const CourseInfo = {
     // return result;
   }
   
-  const result = getLearnerData(CourseInfo, AssignmentGroup, LearnerSubmissions);
+//   const result = getLearnerData(CourseInfo, AssignmentGroup, LearnerSubmissions);
   
-//   console.log(result);
+// //   console.log(result);
   
 
 
-let learnersIdScore = LearnerSubmissions.map(id => ({learner_id: id.learner_id , submission_score: id.submission.score}));
-  console.log(learnersIdScore);
+// let learnersIdScore = LearnerSubmissions.map(id => ({learner_id: id.learner_id , submission_score: id.submission.score}));
+//   console.log(learnersIdScore);
+
+//   let possible_points = AssignmentGroup.assignments.map(points  => ({points_possible: points.points_possible}))
+//   console.log(possible_points);
+
 
 //   let submission_score = LearnerSubmissions.map(id => ({submission_score: id.submission.score}));
 //   console.log(submission_score);
 
-//   let submission_score = LearnerSubmissions.map(id => ({submission_score: id.submission.score}));
-//   console.log(submission_score);
 
-// const LearnerSubmissions = [
-//     {
-//       learner_id: 125,
-//       assignment_id: 1,
-//       submission: {
-//         submitted_at: "2023-01-25",
-//         score: 47
-//       }
+let result = LearnerSubmissions.map(key => {
+
+
+    return { "learner_id": key.learner_id,
+             "avg": key.submission.score,
+            "id": key.assignment_id
+
+    }
+
+    })
+
+    console.log(result)
