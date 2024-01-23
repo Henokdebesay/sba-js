@@ -82,22 +82,20 @@ const CourseInfo = {
     
 
 
-   
-
-    // const result = [
-    //   {
-    //     id: 125,
-    //     avg: 0.985, // (47 + 150) / (50 + 150)
-    //     1: 0.94, // 47 / 50
-    //     2: 1.0 // 150 / 150
-    //   },
-    //   {
-    //     id: 132,
-    //     avg: 0.82, // (39 + 125) / (50 + 150)
-    //     1: 0.78, // 39 / 50
-    //     2: 0.833 // late: (140 - 15) / 150
-    //   }
-    // ];
+    const result = [
+      {
+        id: 125,
+        avg: 0.985, // (47 + 150) / (50 + 150)
+        1: 0.94, // 47 / 50
+        2: 1.0 // 150 / 150
+      },
+      {
+        id: 132,
+        avg: 0.82, // (39 + 125) / (50 + 150)
+        1: 0.78, // 39 / 50
+        2: 0.833 // late: (140 - 15) / 150
+      }
+    ];
   
     // return result;
   }
@@ -106,34 +104,15 @@ const CourseInfo = {
   
 //   console.log(result);
   
-  let final = [];
+let learnersId = LearnerSubmissions.filter((id) => id.learner_id)
 
-//   for (let i = 0; i < LearnerSubmissions; i++){
-//       final.push(LearnerSubmissions[i]["learner_id"][0]);
-//   }
+  console.log(learnersId);
 
-  LearnerSubmissions.forEach(id => {
-    final.push(id.learner_id);
-  })
-  
-  console.log(final);
-
-  let score = []
-
-  LearnerSubmissions.forEach(id => {
-    score.push(id.submission["score"]);
-  })
-  console.log(score);
-
-
-//   LearnerSubmissions.forEach(id => {
-//     final.push(id.learner_id);
-//   })
-
-//   LearnerSubmissions.forEach(id => {
-//     final.push(id.learner_id);
-//   })
-
-//   LearnerSubmissions.forEach(id => {
-//     final.push(id.learner_id);
-//   })
+// const LearnerSubmissions = [
+//     {
+//       learner_id: 125,
+//       assignment_id: 1,
+//       submission: {
+//         submitted_at: "2023-01-25",
+//         score: 47
+//       }
