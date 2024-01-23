@@ -79,53 +79,87 @@ const CourseInfo = {
   function getLearnerData(course, ag, submissions) {
     // here, we would process this data to achieve the desired result.
   
+    let result = submissions.map(key => {
+
+
+        return {
+            "id": key.learner_id,
+            "avg": key.submission.score,
+            "assigment_id": key.assignment_id
+        }
     
-
-
-    const result = [
-      {
-        id: 125,
-        avg: 0.985, // (47 + 150) / (50 + 150)
-        1: 0.94, // 47 / 50
-        2: 1.0 // 150 / 150
-      },
-      {
-        id: 132,
-        avg: 0.82, // (39 + 125) / (50 + 150)
-        1: 0.78, // 39 / 50
-        2: 0.833 // late: (140 - 15) / 150
-      }
-    ];
-  
-    // return result;
-  }
-  
-//   const result = getLearnerData(CourseInfo, AssignmentGroup, LearnerSubmissions);
-  
-// //   console.log(result);
-  
-
-
-// let learnersIdScore = LearnerSubmissions.map(id => ({learner_id: id.learner_id , submission_score: id.submission.score}));
-//   console.log(learnersIdScore);
-
-//   let possible_points = AssignmentGroup.assignments.map(points  => ({points_possible: points.points_possible}))
-//   console.log(possible_points);
-
-
-//   let submission_score = LearnerSubmissions.map(id => ({submission_score: id.submission.score}));
-//   console.log(submission_score);
-
-
-let result = LearnerSubmissions.map(key => {
-
-
-    return { "learner_id": key.learner_id,
-             "avg": key.submission.score,
-            "id": key.assignment_id
-
-    }
-
     })
 
-    console.log(result)
+     let course_assignments = ag.assignments.map(points  => {return points})
+
+              console.log(course_assignments);
+
+    //   let possible_points = AssignmentGroup.assignments.map(points  => ({points_possible: points.points_possible}))
+    //          console.log(possible_points);
+
+
+        
+
+
+
+
+    // const result = [
+    //   {
+    //     id: 125,
+    //     avg: 0.985, // (47 + 150) / (50 + 150)
+    //     1: 0.94, // 47 / 50
+    //     2: 1.0 // 150 / 150
+    //   },
+    //   {
+    //     id: 132,
+    //     avg: 0.82, // (39 + 125) / (50 + 150)
+    //     1: 0.78, // 39 / 50
+    //     2: 0.833 // late: (140 - 15) / 150
+    //   }
+    // ];
+  
+    return result;
+  }
+  
+const result = getLearnerData(CourseInfo, AssignmentGroup, LearnerSubmissions);
+  
+console.log(result);
+  
+
+
+// // let learnersIdScore = LearnerSubmissions.map(id => ({learner_id: id.learner_id , submission_score: id.submission.score}));
+// //   console.log(learnersIdScore);
+
+// //   let possible_points = AssignmentGroup.assignments.map(points  => ({points_possible: points.points_possible}))
+// //   console.log(possible_points);
+
+
+// //   let submission_score = LearnerSubmissions.map(id => ({submission_score: id.submission.score}));
+// //   console.log(submission_score);
+
+
+// let result = LearnerSubmissions.map(key => {
+
+
+//     return { "id": key.learner_id,
+//              "avg": key.submission.score,
+//             "assigment_id": key.assignment_id
+//     }
+
+//     })
+
+    
+    
+//         console.log(result);
+
+// //     id: 125,
+// //     avg: 0.985, // (47 + 150) / (50 + 150)
+// //     1: 0.94, // 47 / 50
+// //     2: 1.0 // 150 / 150
+// //   },
+
+
+
+// let possible_points = AssignmentGroup.assignments.map(points  => ({points_possible: points.points_possible}))
+    
+// console.log(possible_points);
