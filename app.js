@@ -104,9 +104,16 @@ const CourseInfo = {
   
 //   console.log(result);
   
-let learnersIdArray = LearnerSubmissions.map(id => ({learner_id: id.learner_id}));
 
-  console.log(learnersIdArray);
+
+let learnersIdScore = LearnerSubmissions.map(id => ({learner_id: id.learner_id , submission_score: id.submission.score}));
+  console.log(learnersIdScore);
+
+//   let submission_score = LearnerSubmissions.map(id => ({submission_score: id.submission.score}));
+//   console.log(submission_score);
+
+//   let submission_score = LearnerSubmissions.map(id => ({submission_score: id.submission.score}));
+//   console.log(submission_score);
 
 // const LearnerSubmissions = [
 //     {
