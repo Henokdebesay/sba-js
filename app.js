@@ -104,9 +104,9 @@ const CourseInfo = {
   
 //   console.log(result);
   
-let learnersId = LearnerSubmissions.filter((id) => id.learner_id)
+let learnersIdArray = LearnerSubmissions.map(id => ({learner_id: id.learner_id}));
 
-  console.log(learnersId);
+  console.log(learnersIdArray);
 
 // const LearnerSubmissions = [
 //     {
