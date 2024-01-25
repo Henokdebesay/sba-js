@@ -81,18 +81,23 @@ const CourseInfo = {
   
     let result = submissions.map(key => {
 
+      let firstAssignment = 0;
+      let secondAssignment = 0;
+
 
         return {
             "id": key.learner_id,
-            "avg": key.submission.score,
-            "assigment_id": key.assignment_id
+            "Avg": key.submission.score,
+            firstAssignment :  key.submission.score/ 50,
+            secondAssignment :  key.submission.score /50,
+            "Assignment" : key.assignment_id
         }
     
     })
 
-     let course_assignments = ag.assignments.map(points  => {return points})
+    //  let course_assignments = ag.assignments.map(points  => {return points})
 
-              console.log(course_assignments);
+    //           console.log(course_assignments);
 
     //   let possible_points = AssignmentGroup.assignments.map(points  => ({points_possible: points.points_possible}))
     //          console.log(possible_points);
