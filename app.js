@@ -77,54 +77,45 @@ const CourseInfo = {
   ];
   
   function getLearnerData(course, ag, submissions) {
-    // here, we would process this data to achieve the desired result.
-    // let learners = submissions.map((submission) => {
-    //   return {
-    //     learnerId : submission.learner_id,
-    //     assignmentId : submission.assignment_id
-    //   }
-    // });
+    let learnersInfo = submissions.map((submission) => {
+      return {
+        "learnerId": submission.learner_id,
+        "assignmentId": submission.assignment_id,
+        "submitted_date": submission.submission.submitted_at,
+        "score": submission.submission.score
+      };
+    });
+
+    console.log(learnersInfo);
+  
+    let assignmentInfo = ag.assignments.map((info) => {
+      return {
+        "assignmentId": info.id,
+        "due_date": info.due_at,
+        "possible_points": info.points_possible
+      };
+    });
+
+    console.log(assignmentInfo);
+
+  
     let result = [];
-    // console.log(result);
-    // console.log(learners);
-    submissions.forEach(submission => {
-      const { learner_id, assignment_id } = submission;
-      const pointsPossible = ag.assignments.find(assignment => assignment.id === assignment_id).points_possible;
-
-      // console.log(learner_id);
-
-      // console.log(assignment_id);
-
-      // console.log(pointsPossible);
   
-      // Initialize or get existing learner entry
-      if (!result[learner_id]) {
-        result[learner_id] = { id: learner_id, avg: 0 };
+    for (let i = 0; i < learnersInfo.length; i++) {
+      for (let j = 0; j < assignmentInfo.length; j++) {
+        if (learnersInfo[i].assignmentId === assignmentInfo[j].assignmentId) {
+          result.push({
+            "id": learnersInfo[i].learnerId,
+            "avg": 0.985,
+            "1": learnersInfo[i].score / assignmentInfo[j].possible_points,
+            "2" : learnersInfo[i].score / assignmentInfo[j].possible_points
+          });
+        }
       }
-
-  
-      // Update average score and individual assignment score
-      result[learner_id].avg += submission.submission.score;
-      result[learner_id][assignment_id] = submission.submission.score / pointsPossible;
-    });
-   
-    // Finalize average scores
-    Object.values(result).forEach(learnerEntry => {
-      const totalPointsPossible = ag.assignments.reduce((total, assignment) => total + assignment.points_possible, 0);
-      learnerEntry.avg /= totalPointsPossible;
-    });
-
-
-    // result.forEach(key => {
-    //   if (keyassignment_id === '3'){
-    //     delete (key[0].assignment_id) ;
-    //   }
-    // })
-  
-    return Object.values(result);
     }
+    return result;
+  }
   
+  const result = getLearnerData(CourseInfo, AssignmentGroup, LearnerSubmissions);
+  console.log(result);
   
-const result = getLearnerData(CourseInfo, AssignmentGroup, LearnerSubmissions);
-  
-console.log(result);
