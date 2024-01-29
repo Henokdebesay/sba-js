@@ -85,7 +85,6 @@ const CourseInfo = {
         "score": submission.submission.score
       };
     });
-
     console.log(learnersInfo);
   
     let assignmentInfo = ag.assignments.reduce((acc, info) => {
@@ -96,30 +95,47 @@ const CourseInfo = {
       return acc;
     }, {});
 
-    console.log(assignmentInfo);
+    let result = [];
 
-  
-    let inputArray = [];
-  
-    for (let i = 0; i < learnersInfo.length; i++) {
-      for (let j = 0; j < assignmentInfo.length; j++) {
-        if (learnersInfo[i].assignmentId === assignmentInfo[j].assignmentId) {
-          inputArray.push({
-            "id": learnersInfo[i].learnerId,
-            "avg": ((learnersInfo[i].score + learnersInfo[i].score) / (assignmentInfo[0].possible_points + assignmentInfo[1].possible_points)),
-            "1": learnersInfo[i].score / assignmentInfo[0].possible_points,
-            "2" : learnersInfo[i].score / assignmentInfo[1].possible_points
-          });
+  for (let i = 0; i < learnersInfo.length; i++) {
+    let learner = learnersInfo[i];
+    if (learner.assignmentId === 3) continue;
+
+    let totalScore = 0;
+    let totalPossiblePoints = 0;
+
+    for (let j = 0; j < learnersInfo.length; j++) {
+      if (learnersInfo[j].learnerId === learner.learnerId) {
+        let assignmentId = learnersInfo[j].assignmentId;
+        let score = learnersInfo[j].score;
+        let possiblePoints = assignmentInfo[assignmentId].possible_points;
+
+        if (learner.assignmentId === assignmentId && learner.submitted_date > assignmentInfo[assignmentId].due_date) {
+          score -= 10; // Subtract 10 points if assignment is late
         }
+
+        totalScore += score;
+        totalPossiblePoints += possiblePoints;
       }
     }
+    
+    let avg = totalScore / totalPossiblePoints;
 
+    if (learner.assignmentId === 2 && learner.submitted_date > assignmentInfo[learner.assignmentId].due_date) {
+      avg = (totalScore - 10) / totalPossiblePoints; // Adjust average for late submission
+    }
 
+    result.push({
+      "id": learner.learnerId,
+      "avg": avg.toFixed(2),
+      "1": (learner.score / assignmentInfo[learner.assignmentId].possible_points).toFixed(2),
+      "2": (learner.score / assignmentInfo[learner.assignmentId].possible_points).toFixed(2)
 
+    });
+  }
     
     return result;
   }
   
   const result = getLearnerData(CourseInfo, AssignmentGroup, LearnerSubmissions);
   console.log(result);
-  
