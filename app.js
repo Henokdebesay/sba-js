@@ -99,20 +99,24 @@ const CourseInfo = {
     console.log(assignmentInfo);
 
   
-    let result = [];
+    let inputArray = [];
   
     for (let i = 0; i < learnersInfo.length; i++) {
       for (let j = 0; j < assignmentInfo.length; j++) {
         if (learnersInfo[i].assignmentId === assignmentInfo[j].assignmentId) {
-          result.push({
+          inputArray.push({
             "id": learnersInfo[i].learnerId,
-            "avg": 0.985,
-            "1": learnersInfo[i].score / assignmentInfo[j].possible_points,
-            "2" : learnersInfo[i].score / assignmentInfo[j].possible_points
+            "avg": ((learnersInfo[i].score + learnersInfo[i].score) / (assignmentInfo[0].possible_points + assignmentInfo[1].possible_points)),
+            "1": learnersInfo[i].score / assignmentInfo[0].possible_points,
+            "2" : learnersInfo[i].score / assignmentInfo[1].possible_points
           });
         }
       }
     }
+
+
+
+    
     return result;
   }
   
