@@ -95,10 +95,11 @@ const CourseInfo = {
       return acc;
     }, {});
 
-    let result = [];
+    let result = {};
 
   for (let i = 0; i < learnersInfo.length; i++) {
     let learner = learnersInfo[i];
+
     if (learner.assignmentId === 3) continue;
 
     let totalScore = 0;
@@ -110,7 +111,7 @@ const CourseInfo = {
         let score = learnersInfo[j].score;
         let possiblePoints = assignmentInfo[assignmentId].possible_points;
 
-        if (learner.assignmentId === assignmentId && learner.submitted_date > assignmentInfo[assignmentId].due_date) {
+        if (learner.assignmentId === 2 && learner.submitted_date > assignmentInfo[assignmentId].due_date) {
           score -= 10; // Subtract 10 points if assignment is late
         }
 
@@ -118,24 +119,28 @@ const CourseInfo = {
         totalPossiblePoints += possiblePoints;
       }
     }
-    
+
     let avg = totalScore / totalPossiblePoints;
 
     if (learner.assignmentId === 2 && learner.submitted_date > assignmentInfo[learner.assignmentId].due_date) {
-      avg = (totalScore - 10) / totalPossiblePoints; // Adjust average for late submission
+      avg = (totalScore) / totalPossiblePoints; // Adjust average for late submission
     }
 
-    result.push({
-      "id": learner.learnerId,
-      "avg": avg.toFixed(2),
-      "1": (learner.score / assignmentInfo[learner.assignmentId].possible_points).toFixed(2),
-      "2": (learner.score / assignmentInfo[learner.assignmentId].possible_points).toFixed(2)
+    if (!result[learner.learnerId]) {
+      result[learner.learnerId] = {
+        "id": learner.learnerId,
+        "avg": avg,
+        "1": 0,
+        "2": 0
+      };
+    }
 
-    });
+    result[learner.learnerId][learner.assignmentId.toString()] = learner.score / assignmentInfo[learner.assignmentId].possible_points;
   }
-    
-    return result;
-  }
+
+  return Object.values(result);
+}
+
   
   const result = getLearnerData(CourseInfo, AssignmentGroup, LearnerSubmissions);
   console.log(result);
