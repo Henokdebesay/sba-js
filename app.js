@@ -88,13 +88,13 @@ const CourseInfo = {
 
     console.log(learnersInfo);
   
-    let assignmentInfo = ag.assignments.map((info) => {
-      return {
-        "assignmentId": info.id,
+    let assignmentInfo = ag.assignments.reduce((acc, info) => {
+      acc[info.id] = {
         "due_date": info.due_at,
         "possible_points": info.points_possible
       };
-    });
+      return acc;
+    }, {});
 
     console.log(assignmentInfo);
 
