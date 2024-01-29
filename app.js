@@ -77,6 +77,14 @@ const CourseInfo = {
   ];
   
   function getLearnerData(course, ag, submissions) {
+
+    try {
+      if (!course || !ag || !submissions || !Array.isArray(submissions)) {
+        throw new Error("Invalid input data. Please provide valid course, assignment group, and learner submissions.");
+      }
+    
+
+
     let learnersInfo = submissions.map((submission) => {
       return {
         "learnerId": submission.learner_id,
@@ -137,9 +145,15 @@ const CourseInfo = {
 
     result[learner.learnerId][learner.assignmentId.toString()] = learner.score / assignmentInfo[learner.assignmentId].possible_points;
   }
-
+    
   return Object.values(result);
 }
+catch (error) {
+  console.error("An error occurred:", error.message);
+  return null; // or handle the error as per your requirement
+}
+}
+
 
   
   const result = getLearnerData(CourseInfo, AssignmentGroup, LearnerSubmissions);
