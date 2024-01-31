@@ -1,15 +1,15 @@
 # sba-js
 
-By:
+#By:
 Henok Debesay
 
-Description
+#Description
 
-SBA 308: JavaScript Fundamentals
+#SBA 308: JavaScript Fundamentals
 An assessment gauges understanding of fundamental JavaScript concepts and ability to apply the concepts in a practical manner
 
 
-Technologies Used:
+#Technologies Used:
 
 JavaScript
 VS Code
